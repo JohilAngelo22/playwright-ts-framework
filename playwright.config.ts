@@ -16,7 +16,7 @@ export default defineConfig({
     use: {
         viewport: null,
         trace: 'on',
-        headless: false, // Enable headed mode
+        headless: true, // Enable headed mode
     },
     projects: [
         {

@@ -58,6 +58,9 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+
     - name: Run Visual Regression Tests
       run: npx playwright test tests/visual
 
@@ -66,6 +69,18 @@ jobs:
       with:
         name: visual-test-artifacts
         path: visual-baseline
+        
+    - name: Upload Playwright HTML report
+      uses: actions/upload-artifact@v4
+      with:
+        name: playwright-visual-html-report
+        path: playwright-report
+
+    - name: Upload Allure report
+      uses: actions/upload-artifact@v4
+      with:
+        name: allure-visual-report
+        path: allure-results
 
   api-tests:
     runs-on: ubuntu-latest
