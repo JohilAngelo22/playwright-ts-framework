@@ -23,7 +23,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
@@ -31,8 +31,9 @@ jobs:
       - name: Run UI Playwright tests
         run: npx playwright test tests/ui
 
-      - name: Generate Allure HTML report
-        run: npx allure generate ./allure-results --clean -o ./allure-report
+      - name: Generate Allure report
+        run: |
+          npx allure generate ./allure-results --clean -o ./allure-report
 
       - name: Upload Playwright HTML report
         uses: actions/upload-artifact@v4
@@ -40,10 +41,10 @@ jobs:
           name: playwright-ui-html-report
           path: playwright-report
 
-      - name: Upload Allure HTML report
+      - name: Upload Allure report
         uses: actions/upload-artifact@v4
         with:
-          name: allure-ui-html-report
+          name: allure-ui-report
           path: allure-report
 
   visual-tests:
@@ -59,7 +60,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
@@ -67,13 +68,14 @@ jobs:
       - name: Run Visual Regression Tests
         run: npx playwright test tests/visual --update-snapshots
 
-      - name: Generate Allure HTML report
-        run: npx allure generate ./allure-results --clean -o ./allure-report
+      - name: Generate Allure report
+        run: |
+          npx allure generate ./allure-results --clean -o ./allure-report
 
-      - name: Upload Visual Test Artifacts (baseline snapshots)
+      - name: Upload Visual Baseline
         uses: actions/upload-artifact@v4
         with:
-          name: visual-test-artifacts
+          name: visual-test-baseline
           path: visual-baseline
 
       - name: Upload Playwright HTML report
@@ -82,15 +84,15 @@ jobs:
           name: playwright-visual-html-report
           path: playwright-report
 
-      - name: Upload Allure HTML report
+      - name: Upload Allure report
         uses: actions/upload-artifact@v4
         with:
-          name: allure-visual-html-report
+          name: allure-visual-report
           path: allure-report
 
   api-tests:
     runs-on: ubuntu-latest
-    needs: [ui-tests, visual-tests]
+    needs: [ui-tests]
 
     steps:
       - name: Checkout code
@@ -102,13 +104,14 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Run API Playwright tests
         run: npx playwright test tests/api
 
-      - name: Generate Allure HTML report
-        run: npx allure generate ./allure-results --clean -o ./allure-report
+      - name: Generate Allure report
+        run: |
+          npx allure generate ./allure-results --clean -o ./allure-report
 
       - name: Upload Playwright HTML report
         uses: actions/upload-artifact@v4
@@ -116,8 +119,8 @@ jobs:
           name: playwright-api-html-report
           path: playwright-report
 
-      - name: Upload Allure HTML report
+      - name: Upload Allure report
         uses: actions/upload-artifact@v4
         with:
-          name: allure-api-html-report
+          name: allure-api-report
           path: allure-report
