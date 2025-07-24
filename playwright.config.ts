@@ -14,27 +14,38 @@ export default defineConfig({
         ['junit', { outputFile: 'results.xml' }],
     ],
     use: {
+        viewport: null,
         trace: 'on',
-        headless: true, // Enable headed mode
+        headless: false, // Enable headed mode
     },
     projects: [
         {
             name: 'API Tests',
+            grep: /@api/, 
             use: {
                 baseURL: 'https://httpbin.org',
             },
         },
         {
             name: 'Chromium',
+            grep: /@ui/, 
             use: { ...devices['Desktop Chrome'] },
         },
         {
             name: 'Firefox',
+            grep: /@ui/, 
             use: { ...devices['Desktop Firefox'] },
         },
         {
             name: 'WebKit',
+            grep: /@ui/, 
             use: { ...devices['Desktop Safari'] },
         },
+        {
+            name: 'Visual Tests',
+            grep: /@visual/, 
+            use: { ...devices['Desktop Chrome'] },
+            snapshotDir: '././visual-baseline',
+        }
     ],
 });

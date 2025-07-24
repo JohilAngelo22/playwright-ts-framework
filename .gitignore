@@ -37,3 +37,7 @@ coverage/
 *.tar
 *.gz
 *.tgz
+
+# Allure
+allure-results/
+allure-report/
