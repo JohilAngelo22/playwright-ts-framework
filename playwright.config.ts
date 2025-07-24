@@ -15,7 +15,7 @@ export default defineConfig({
     ],
     use: {
         trace: 'on',
-        headless: false, // Enable headed mode
+        headless: true, // Enable headed mode
     },
     projects: [
         {
