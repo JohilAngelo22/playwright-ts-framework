@@ -1,0 +1,7 @@
+{
+  "baseURL": "https://httpbin.org",
+  "endpoints": {
+    "post": "/post",
+    "nonexistent": "/nonexistent"
+  }
+}

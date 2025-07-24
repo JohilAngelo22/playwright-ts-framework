@@ -1,0 +1,39 @@
+# Node.js dependencies
+node_modules/
+
+# Playwright reports
+playwright-report/
+allure-results/
+
+# Test results
+results.json
+results.xml
+test-results/
+
+# Environment files
+.env
+
+# Logs
+*.log
+
+# IDE settings
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Coverage reports
+coverage/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Generated files
+*.zip
+*.tar
+*.gz
+*.tgz
